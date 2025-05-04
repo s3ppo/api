@@ -2,15 +2,7 @@ import { Inject, Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { readFile } from 'fs/promises';
 
 import { pubsub, PUBSUB_CHANNEL } from '@app/core/pubsub.js';
-import { catchHandlers } from '@app/core/utils/misc/catch-handlers.js';
-import { sleep } from '@app/core/utils/misc/sleep.js';
-import { getters } from '@app/store/index.js';
-import {
-    ContainerPortType,
-    Lxc,
-    LxcContainer
-} from '@app/unraid-api/graph/resolvers/lxc/lxc.model.js';
-
+import { Lxc, LxcContainer } from '@app/unraid-api/graph/resolvers/lxc/lxc.model.js';
 
 @Injectable()
 export class LxcService implements OnModuleInit {
@@ -19,8 +11,7 @@ export class LxcService implements OnModuleInit {
     public static readonly CONTAINER_CACHE_KEY = 'lxc_containers';
     public static readonly NETWORK_CACHE_KEY = 'lxc_networks';
 
-    constructor() {
-    }
+    constructor() {}
 
     async getAppInfo() {
         const containers = await this.getContainers();
@@ -43,8 +34,16 @@ export class LxcService implements OnModuleInit {
     }
 
     public async getContainers(): Promise<LxcContainer[]> {
-        // Placeholder implementation returning an empty array
-        return Promise.resolve([]);
+        const containers: LxcContainer[] = [
+            {
+                id: 'lxc_container_1',
+                name: 'Container 1',
+            },
+            {
+                id: 'lxc_container_2',
+                name: 'Container 2',
+            },
+        ];
+        return containers;
     }
-
 }

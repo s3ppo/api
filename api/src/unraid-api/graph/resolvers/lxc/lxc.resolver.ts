@@ -6,10 +6,7 @@ import {
     UsePermissions,
 } from '@app/unraid-api/graph/directives/use-permissions.directive.js';
 import { Resource } from '@app/unraid-api/graph/resolvers/base.model.js';
-import {
-    Lxc,
-    LxcContainer,
-} from '@app/unraid-api/graph/resolvers/lxc/lxc.model.js';
+import { Lxc, LxcContainer } from '@app/unraid-api/graph/resolvers/lxc/lxc.model.js';
 import { LxcService } from '@app/unraid-api/graph/resolvers/lxc/lxc.service.js';
 
 @Resolver(() => Lxc)

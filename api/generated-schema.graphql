@@ -1452,7 +1452,7 @@ type UserAccount implements Node {
 
 type LxcContainer implements Node {
   id: PrefixedID!
-  names: [String!]!
+  name: String!
 }
 
 type Lxc implements Node {

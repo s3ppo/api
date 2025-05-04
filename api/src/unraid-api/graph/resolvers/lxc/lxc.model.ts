@@ -5,19 +5,13 @@ import { GraphQLJSONObject } from 'graphql-type-json';
 
 import { Node } from '@app/unraid-api/graph/resolvers/base.model.js';
 
-export enum ContainerPortType {
-    TCP = 'TCP',
-    UDP = 'UDP',
-}
-
 @ObjectType({ implements: () => Node })
 export class LxcContainer extends Node {
-    @Field(() => [String])
-    names!: string[];
+    @Field(() => String)
+    name!: string;
 }
 
 @ObjectType({ implements: () => Node })
-
 @ObjectType({
     implements: () => Node,
 })
