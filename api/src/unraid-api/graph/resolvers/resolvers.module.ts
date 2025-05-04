@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 
+import { L } from 'vitest/dist/chunks/reporters.d.CqBhtcTq.js';
+
 import { AuthModule } from '@app/unraid-api/auth/auth.module.js';
 import { ApiKeyResolver } from '@app/unraid-api/graph/resolvers/api-key/api-key.resolver.js';
 import { ArrayModule } from '@app/unraid-api/graph/resolvers/array/array.module.js';
@@ -17,6 +19,8 @@ import { FlashResolver } from '@app/unraid-api/graph/resolvers/flash/flash.resol
 import { InfoResolver } from '@app/unraid-api/graph/resolvers/info/info.resolver.js';
 import { LogsResolver } from '@app/unraid-api/graph/resolvers/logs/logs.resolver.js';
 import { LogsService } from '@app/unraid-api/graph/resolvers/logs/logs.service.js';
+import { LxcResolver } from '@app/unraid-api/graph/resolvers/lxc/lxc.resolver.js';
+import { LxcService } from '@app/unraid-api/graph/resolvers/lxc/lxc.service.js';
 import { RootMutationsResolver } from '@app/unraid-api/graph/resolvers/mutation/mutation.resolver.js';
 import { NetworkResolver } from '@app/unraid-api/graph/resolvers/network/network.resolver.js';
 import { NotificationsResolver } from '@app/unraid-api/graph/resolvers/notifications/notifications.resolver.js';
@@ -32,9 +36,6 @@ import { VmsService } from '@app/unraid-api/graph/resolvers/vms/vms.service.js';
 import { ServicesResolver } from '@app/unraid-api/graph/services/services.resolver.js';
 import { SharesResolver } from '@app/unraid-api/graph/shares/shares.resolver.js';
 import { MeResolver } from '@app/unraid-api/graph/user/user.resolver.js';
-import { L } from 'vitest/dist/chunks/reporters.d.CqBhtcTq.js';
-import { LxcResolver } from '@app/unraid-api/graph/resolvers/lxc/lxc.resolver.js';
-import { LxcService } from '@app/unraid-api/graph/resolvers/lxc/lxc.service.js';
 
 @Module({
     imports: [ArrayModule, AuthModule, ConnectModule, CustomizationModule, DockerModule, DisksModule],
