@@ -9,6 +9,12 @@ import { Node } from '@app/unraid-api/graph/resolvers/base.model.js';
 export class LxcContainer extends Node {
     @Field(() => String)
     name!: string;
+    @Field(() => String)
+    state!: string;
+    @Field(() => String)
+    ipv4!: string;
+    @Field(() => String)
+    autostart!: string;
 }
 
 @ObjectType({ implements: () => Node })

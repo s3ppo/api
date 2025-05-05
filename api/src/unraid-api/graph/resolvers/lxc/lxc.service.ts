@@ -1,8 +1,11 @@
-import { Inject, Injectable, Logger, OnModuleInit } from '@nestjs/common';
-import { readFile } from 'fs/promises';
+import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
+import { exec } from 'child_process';
+import { promisify } from 'util';
 
 import { pubsub, PUBSUB_CHANNEL } from '@app/core/pubsub.js';
-import { Lxc, LxcContainer } from '@app/unraid-api/graph/resolvers/lxc/lxc.model.js';
+import { LxcContainer } from '@app/unraid-api/graph/resolvers/lxc/lxc.model.js';
+
+const execAsync = promisify(exec);
 
 @Injectable()
 export class LxcService implements OnModuleInit {
@@ -34,16 +37,34 @@ export class LxcService implements OnModuleInit {
     }
 
     public async getContainers(): Promise<LxcContainer[]> {
-        const containers: LxcContainer[] = [
-            {
-                id: 'lxc_container_1',
-                name: 'Container 1',
-            },
-            {
-                id: 'lxc_container_2',
-                name: 'Container 2',
-            },
-        ];
-        return containers;
+        try {
+            const { stdout } = await execAsync('lxc-ls -f');
+            const lines = stdout.trim().split('\n');
+            if (lines.length < 2) {
+                return [];
+            }
+
+            const headers = lines[0].trim().split(/\s{2,}/);
+            const containers: LxcContainer[] = lines.slice(1).map((line, index) => {
+                const values = line.trim().split(/\s{2,}/);
+                const data: Record<string, string | null> = {};
+                headers.forEach((header, i) => {
+                    data[header.toLowerCase()] = values[i] || null;
+                });
+
+                return {
+                    id: `lxc_${index}`,
+                    name: data.name ?? `container_${index}`,
+                    state: data.state ?? '',
+                    ipv4: data.ipv4 ?? '',
+                    autostart: data.autostart === 'YES' ? 'YES' : 'NO',
+                } as LxcContainer;
+            });
+
+            return containers;
+        } catch (error) {
+            this.logger.error('Fehler beim Abrufen der LXC-Container:', error);
+            return [];
+        }
     }
 }
