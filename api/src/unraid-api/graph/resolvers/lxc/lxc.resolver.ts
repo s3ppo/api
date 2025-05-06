@@ -15,7 +15,7 @@ export class LxcResolver {
 
     @UsePermissions({
         action: AuthActionVerb.READ,
-        resource: Resource.DOCKER,
+        resource: Resource.LXC,
         possession: AuthPossession.ANY,
     })
     @Query(() => Lxc)
