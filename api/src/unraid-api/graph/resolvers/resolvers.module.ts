@@ -1,7 +1,5 @@
 import { Module } from '@nestjs/common';
 
-import { L } from 'vitest/dist/chunks/reporters.d.CqBhtcTq.js';
-
 import { AuthModule } from '@app/unraid-api/auth/auth.module.js';
 import { ApiKeyResolver } from '@app/unraid-api/graph/resolvers/api-key/api-key.resolver.js';
 import { ArrayModule } from '@app/unraid-api/graph/resolvers/array/array.module.js';

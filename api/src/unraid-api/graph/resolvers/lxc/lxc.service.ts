@@ -11,11 +11,6 @@ const execAsync = promisify(exec);
 export class LxcService implements OnModuleInit {
     private readonly logger = new Logger(LxcService.name);
 
-    public static readonly CONTAINER_CACHE_KEY = 'lxc_containers';
-    public static readonly NETWORK_CACHE_KEY = 'lxc_networks';
-
-    constructor() {}
-
     async getAppInfo() {
         const containers = await this.getContainers();
         const installedCount = containers.length;
@@ -63,7 +58,7 @@ export class LxcService implements OnModuleInit {
 
             return containers;
         } catch (error) {
-            this.logger.error('Fehler beim Abrufen der LXC-Container:', error);
+            this.logger.error('Error while getting informations from LXC', error);
             return [];
         }
     }
